@@ -8,7 +8,9 @@ productsAmount.forEach(amount => {
     amounts.push(+amount.innerText);
 });
 
-// Calculate & Set Value of Total
+/*** 
+  Calculate & Set Value of Total
+***/
 const controlTotal = () => {
     const subTotal = document.getElementById("sub-total");
     const grandTotal = document.getElementById("grand-total");
@@ -24,9 +26,9 @@ const controlTotal = () => {
     grandTotal.innerText = subTotalAmount + taxAmount;
 }
 
-// Calculate & Set value of Total before event
-controlTotal();
-
+/*** 
+  Cart Controller with the handling of increament & decreament process
+***/
 const handleCart = (actionBtn, isIncreament) => { 
     [...actionBtn].forEach((btn, i) => {
         btn.addEventListener("click", function () {
@@ -41,13 +43,17 @@ const handleCart = (actionBtn, isIncreament) => {
             this.parentNode.nextElementSibling.innerText =
                 +this.parentNode.children[1].value * amounts[i];
             
+            // Calculate & Set value of Total during event handling
             controlTotal();
         });
     });
 }
 
-// For handling Increamental process
+// Calculate & Set value of Total before event
+controlTotal();
+
+// Handle Increamental process
 handleCart(increamentBtn, true);
 
-// For handling Decreamental process
+// Handle Decreamental process
 handleCart(decreamentBtn, false);
