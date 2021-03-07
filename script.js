@@ -1,9 +1,6 @@
 const increamentBtn = document.getElementsByClassName('btn-increament');
 const decreamentBtn = document.getElementsByClassName('btn-decreament');
 const productsAmount = [...document.getElementsByClassName('amount')];
-const subTotal = document.getElementById('sub-total');
-const grandTotal = document.getElementById("grand-total");
-const tax = document.getElementById('tax');
 
 // Store the cost of all products
 const amounts = [];
@@ -12,7 +9,10 @@ productsAmount.forEach(amount => {
 });
 
 // Calculate & Set Value of Total
-const controlTotal = () => { 
+const controlTotal = () => {
+    const subTotal = document.getElementById("sub-total");
+    const grandTotal = document.getElementById("grand-total");
+    const tax = document.getElementById("tax");
     let subTotalAmount = 0;
     productsAmount.forEach(amount => {
       subTotalAmount += +amount.innerHTML;
