@@ -59,3 +59,11 @@ handleCart(increamentBtn, true);
 
 // Handle Decreamental process
 handleCart(decreamentBtn, false);
+
+const removeIcons = document.getElementsByClassName('remove-item');
+[...removeIcons].forEach(removeIcon => { 
+    removeIcon.addEventListener('click', function () { 
+        this.parentNode.parentNode.parentNode.remove();
+        console.log(+this.previousElementSibling.innerText);
+    });
+})
