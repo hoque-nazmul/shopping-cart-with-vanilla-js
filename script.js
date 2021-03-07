@@ -1,6 +1,9 @@
 const increamentBtn = document.getElementsByClassName('btn-increament');
 const decreamentBtn = document.getElementsByClassName('btn-decreament');
 const productsAmount = [...document.getElementsByClassName('amount')];
+const removeIcons = document.getElementsByClassName("remove-item");
+const cartArea = document.getElementById("cart-content");
+const emptyMsg = document.getElementById('empty-msg');
 
 // Store the cost of all products
 const amounts = [];
@@ -54,6 +57,15 @@ const handleCart = (actionBtn, isIncreament) => {
     });
 }
 
+const displayEmptyMsg = () => { 
+    if (cartArea.children.length < 3) {
+        cartArea.style.display = 'none';
+        emptyMsg.style.display = 'block';
+    }
+}
+
+displayEmptyMsg();
+
 // Calculate & Set value of Total before event
 controlTotal();
 
@@ -63,17 +75,11 @@ handleCart(increamentBtn, true);
 // Handle Decreamental process
 handleCart(decreamentBtn, false);
 
-const removeIcons = document.getElementsByClassName('remove-item');
 [...removeIcons].forEach(removeIcon => { 
     removeIcon.addEventListener('click', function () { 
         let removedProductConst = parseFloat(this.previousElementSibling.innerText);
         this.parentNode.parentNode.parentNode.remove();
         controlTotal(removedProductConst);
-
-
-        const cartArea = document.getElementById('cart-content');
-        if (cartArea.children.length < 3) { 
-            cartArea.style.display = 'none';
-        }
+        displayEmptyMsg();
     });
 })
