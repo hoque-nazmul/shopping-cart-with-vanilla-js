@@ -14,14 +14,17 @@ const setAmount = amount => `$ ${amount}`;
 /*** 
   Calculate & Set Value of Total
 ***/
-const controlTotal = () => {
+const controlTotal = (removedProductCost = 0) => {
     const subTotal = document.getElementById("sub-total");
     const grandTotal = document.getElementById("grand-total");
     const tax = document.getElementById("tax");
     let subTotalAmount = 0;
     productsAmount.forEach(amount => {
-      subTotalAmount += +amount.innerHTML;
+        subTotalAmount += +amount.innerHTML;
     });
+    if (removedProductCost) {
+        subTotalAmount = subTotalAmount - removedProductCost;
+    }
     let taxAmount = Math.round(subTotalAmount * 0.1);
     subTotal.innerText = setAmount(subTotalAmount);
     tax.innerText = setAmount(taxAmount);
@@ -63,7 +66,8 @@ handleCart(decreamentBtn, false);
 const removeIcons = document.getElementsByClassName('remove-item');
 [...removeIcons].forEach(removeIcon => { 
     removeIcon.addEventListener('click', function () { 
+        let removedProductConst = parseFloat(this.previousElementSibling.innerText);
         this.parentNode.parentNode.parentNode.remove();
-        console.log(+this.previousElementSibling.innerText);
+        controlTotal(removedProductConst);
     });
 })
