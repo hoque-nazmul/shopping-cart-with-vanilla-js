@@ -69,5 +69,11 @@ const removeIcons = document.getElementsByClassName('remove-item');
         let removedProductConst = parseFloat(this.previousElementSibling.innerText);
         this.parentNode.parentNode.parentNode.remove();
         controlTotal(removedProductConst);
+
+
+        const cartArea = document.getElementById('cart-content');
+        if (cartArea.children.length < 3) { 
+            cartArea.style.display = 'none';
+        }
     });
 })
