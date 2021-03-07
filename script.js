@@ -8,6 +8,9 @@ productsAmount.forEach(amount => {
     amounts.push(+amount.innerText);
 });
 
+// Set amount with $ icon
+const setAmount = amount => `$ ${amount}`;
+
 /*** 
   Calculate & Set Value of Total
 ***/
@@ -19,11 +22,10 @@ const controlTotal = () => {
     productsAmount.forEach(amount => {
       subTotalAmount += +amount.innerHTML;
     });
-
     let taxAmount = Math.round(subTotalAmount * 0.1);
-    subTotal.innerText = subTotalAmount;
-    tax.innerText = taxAmount;
-    grandTotal.innerText = subTotalAmount + taxAmount;
+    subTotal.innerText = setAmount(subTotalAmount);
+    tax.innerText = setAmount(taxAmount);
+    grandTotal.innerText = setAmount(subTotalAmount + taxAmount);
 }
 
 /*** 
