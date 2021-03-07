@@ -48,15 +48,15 @@ const handleCart = (actionBtn, isIncreament) => {
                   this.parentNode.children[1].value = qty - 1;
                 }
             }
-            this.parentNode.nextElementSibling.innerText =
-                +this.parentNode.children[1].value * amounts[i];
-            
-            // Calculate & Set value of Total during event handling
+            this.parentNode.nextElementSibling.innerText = +this.parentNode.children[1].value * amounts[i];
             controlTotal();
         });
     });
 }
 
+/*** 
+  Display Empty Message
+***/
 const displayEmptyMsg = () => { 
     if (cartArea.children.length < 3) {
         cartArea.style.display = 'none';
@@ -64,6 +64,19 @@ const displayEmptyMsg = () => {
     }
 }
 
+/*** 
+  Remove Cart Item Functionalities
+***/
+[...removeIcons].forEach(removeIcon => { 
+    removeIcon.addEventListener('click', function () { 
+        let removedProductConst = parseFloat(this.previousElementSibling.innerText);
+        this.parentNode.parentNode.parentNode.remove();
+        controlTotal(removedProductConst);
+        displayEmptyMsg();
+    });
+})
+
+// display msg in initial empty state
 displayEmptyMsg();
 
 // Calculate & Set value of Total before event
@@ -75,11 +88,3 @@ handleCart(increamentBtn, true);
 // Handle Decreamental process
 handleCart(decreamentBtn, false);
 
-[...removeIcons].forEach(removeIcon => { 
-    removeIcon.addEventListener('click', function () { 
-        let removedProductConst = parseFloat(this.previousElementSibling.innerText);
-        this.parentNode.parentNode.parentNode.remove();
-        controlTotal(removedProductConst);
-        displayEmptyMsg();
-    });
-})
